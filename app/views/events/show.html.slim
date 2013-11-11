@@ -1,0 +1,18 @@
+#container
+
+h1 = @event.title
+
+p = @event.category.name
+p = @event.start_date
+p = @event.start_date
+p = @event.venue.name
+p = @event.recommended
+p = @event.price
+/ p 
+/ - if @event.pictures.empty?
+/   p No Picture
+/ - else
+/   image_tag #{@event.pictures.first.image.url}
+p 
+  img border="0" width="152" height="110" src="#{@event.pictures.first.image.url}" 
+

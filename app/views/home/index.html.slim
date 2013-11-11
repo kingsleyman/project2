@@ -1,0 +1,60 @@
+/ #container
+/   h1 Homepage
+
+/   table.table
+/       tr.tablehead
+/         / td Event ID
+/         td = sortable_column "Title"
+/         / td Title
+/         td Category
+/         td Start date
+/         td End date
+/         td = sortable_column "Date created"
+/         td Last modified
+/         td Venue
+/         td District
+/         td Price (HKD)
+/         td Recommended
+/         td Image URL
+/         td Published
+/         td Edit
+/         td Delete
+        
+/       - @events.each do |e|
+/         tr
+/           / td
+/           / td = link_to e.title, event_url(e)
+/           td = link_to h(e.title), event_url(e)
+/           td = link_to e.category.name, category_url(e)
+/           td #{e.start_date}
+/           td #{e.end_date}
+/           td #{e.created_at}
+/           td #{e.updated_at}
+/           td = link_to e.venue.name, venue_url(e)
+/           td #{e.venue.district}
+/           td #{e.price}
+/           td #{e.recommended}
+/           td #{e.pictures.first.image.url}
+/           td
+/           td = link_to "Edit", edit_event_url(e)
+/           td = link_to "Delete", event_url(e), method: :delete, confirm: "Are you sure?"
+
+- @events.each do |e|
+
+    /! Open event div
+    #event
+      img.event-img border="0" width="97" height="70" src="#{e.pictures.first.image.url}" 
+      .event-heading = link_to e.title, event_url(e)
+      - if e.recommended == "1"
+        .recommended Recommended
+      .event-category(class="category-#{e.category.name.underscore.gsub(/[\s&]/, '-')}") = link_to e.category.name, category_url(e)
+
+
+      .event-venue = link_to e.venue.name, venue_url(e)
+      /! Close event div
+
+javascript: 
+  $(function() {
+    console.log($(".pop a").text())
+
+  })

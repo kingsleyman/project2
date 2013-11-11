@@ -1,22 +1,33 @@
 Project2::Application.routes.draw do
+  
+  root 'home#index'
 
-# Sign in/out
-  get    'login' => 'session#new'
-  post  'login' => 'session#create'
-  delete 'logout' => 'session#destroy'
-  get    'logout' => 'session#destroy'
+  resources :events
+  resources :admins
+  resources :venues
+  resources :categories
+  resources :home
+
+
+  scope '/admin' do
+    resources :events
+  end
+
+  # Sign in/out
+  get    'login' => 'session#new', as: :login
+  post   'login' => 'session#create'
+  delete 'logout' => 'session#destroy', as: :logout
   
   # Registration
-  get  'register/:code' => 'registration#new'
+  get  'register/:code' => 'registration#new', as: :register
   post 'register/:code' => 'registration#create'
   
   # Password reset
-  get  'reset/:code' => 'password#edit'
-  put  'reset/:code' => 'password#update'
+  get   'reset/:code' => 'password#edit', as: :reset
+  put   'reset/:code' => 'password#update'
   patch 'reset/:code' => 'password#update'
   
   get 'privacy' => 'site#privacy'
-  get 'terms'  => 'site#terms'
-
-  root 'site#index'
+  get 'terms'   => 'site#terms'
+  
 end

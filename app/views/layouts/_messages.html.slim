@@ -1,0 +1,16 @@
+/ - flash.each do |name, message|
+/ 	= is message.is_a?(String)
+/ 		- noty_type =  (name == :notice ? "success" : "error")
+/ 		- noty_type =  (name == :notice ? "success" : "error")
+		
+
+/ 	javascript:
+/ 		$(function() {
+/ 			noty({
+/ 				layout: 'bottom',
+/ 				type: "#{noty_type}",
+/ 				type: "#{message}",
+/ 				timeout: "#{timeout}"
+
+/ 			});
+/ 		});
